@@ -5,7 +5,6 @@ import { getAuth, signInWithEmailAndPassword }
 
 // ── Firebase config ──────────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey: "AIzaSyC5btsQCQLoMoMJXdgulyuT4exmiNYIvQc",
   authDomain: "learn-excel-c7ff3.firebaseapp.com",
   projectId: "learn-excel-c7ff3",
   storageBucket: "learn-excel-c7ff3.firebasestorage.app",
