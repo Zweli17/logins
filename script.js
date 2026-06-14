@@ -3,14 +3,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, signInWithEmailAndPassword }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// ── Firebase config ──────────────────────────────────────────────────────────
-const firebaseConfig = {
-  authDomain: "learn-excel-c7ff3.firebaseapp.com",
-  projectId: "learn-excel-c7ff3",
-  storageBucket: "learn-excel-c7ff3.firebasestorage.app",
-  messagingSenderId: "276738291649",
-  appId: "1:276738291649:web:6bde709f8e7f3834d52140",
-  measurementId: "G-ZPEKVQX551"
 };
 
 // ── Init Firebase ────────────────────────────────────────────────────────────
