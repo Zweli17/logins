@@ -50,6 +50,11 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  if (!auth) {
+    showError(submitBtn, "Firebase is not configured. Please add your config to shared/firebase-config.js.", "signupError");
+    return;
+  }
+
   setLoading(submitBtn, true, "Sign up");
 
   try {
