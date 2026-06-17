@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="shared/shared.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <title>Sign Up</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="forms-container">
+        <div class="signin-signup">
+
+            <!--  SIGNUP FORM -->
+            <form class="auth-form" id="signupForm">
+                <h2 class="title">Sign up</h2>
+
+                <div class="input-field">
+                    <i class='bx bxs-user'></i>
+                    <input type="email" id="email" placeholder="Email" required />
+                </div>
+
+                <div class="input-field">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input type="password" id="password" placeholder="Password" required />
+                </div>
+
+                <div class="input-field">
+                    <i class='bx bxs-lock'></i>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+                </div>
+
+                <input type="submit" value="Sign up" class="btn solid" />
+            </form>
+
+        </div>
+    </div>
+
+    <!--  PANEL -->
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>Already have an account?</h3>
+
+                <!--CONNECTED TO LOGIN PAGE -->
+                <button class="btn transparent" id="sign-in-btn" type="button">
+                    <a href="logins.html" style="text-decoration: none; color: inherit;">
+                    Sign in
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--- IMPORTANT: USE MODULE -->
+<script type="module" src="signup.js"></script>
+</body>
+</html>
