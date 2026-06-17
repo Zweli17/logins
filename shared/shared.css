@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ── Design tokens ──────────────────────────────────────────────────────────── */
+:root {
+    --font-primary: "Montserrat", sans-serif;
+
+    --color-text: #fff;
+    --color-dark: #333;
+    --color-error: #f87171;
+    --color-success: #34d399;
+
+    --glass-bg: rgba(0, 0, 0, 0.5);
+    --glass-blur: blur(10px);
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-bg-focus: rgba(255, 255, 255, 0.15);
+    --input-border: rgba(255, 255, 255, 0.2);
+    --input-border-focus: rgba(255, 255, 255, 0.4);
+    --placeholder-color: rgba(255, 255, 255, 0.7);
+    --btn-hover-bg: rgba(255, 255, 255, 0.1);
+
+    --radius-pill: 40px;
+    --radius-card: 10px;
+    --transition-default: all 0.3s ease;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-primary);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../1.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
+.container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+.forms-container {
+    width: 100%;
+}
+
+.signin-signup {
+    width: 100%;
+}
+
+/* ── Glass card (login / signup form) ───────────────────────────────────────── */
+.auth-form {
+    background: var(--glass-bg);
+    color: var(--color-text);
+    border-radius: var(--radius-card);
+    padding: 30px 40px;
+    backdrop-filter: var(--glass-blur);
+}
+
+.auth-form .title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* ── Input fields ───────────────────────────────────────────────────────────── */
+.input-field {
+    position: relative;
+    margin: 20px 0;
+    height: 50px;
+    width: 100%;
+}
+
+.input-field i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--color-text);
+}
+
+.input-field input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    background: var(--input-bg);
+    padding: 20px 45px 20px 20px;
+    font-size: 16px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-pill);
+    color: var(--color-text);
+    transition: var(--transition-default);
+}
+
+.input-field input:focus {
+    background: var(--input-bg-focus);
+    border-color: var(--input-border-focus);
+}
+
+.input-field input::placeholder {
+    color: var(--placeholder-color);
+}
+
+/* ── Screen reader only ─────────────────────────────────────────────────────── */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────────── */
+.btn {
+    width: 100%;
+    height: 45px;
+    border: 2px solid var(--color-text);
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: var(--transition-default);
+    margin-top: 10px;
+}
+
+.btn.solid {
+    background: var(--color-text);
+    color: var(--color-dark);
+}
+
+.btn.solid:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn.solid:active {
+    transform: translateY(0);
+}
+
+.btn.transparent {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-text);
+}
+
+.btn.transparent:hover {
+    background: var(--btn-hover-bg);
+}
+
+/* ── Panels ─────────────────────────────────────────────────────────────────── */
+.panels-container {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-panel {
+    text-align: center;
+    color: var(--color-text);
+}
+
+.content {
+    padding: 20px;
+}
+
+.content h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* ── Toast notifications ────────────────────────────────────────────────────── */
+.toast.success .toast-dot { background: var(--color-success); }
+.toast.fail    .toast-dot { background: var(--color-error); }
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .auth-form {
+        padding: 20px 30px;
+    }
+
+    .auth-form .title {
+        font-size: 24px;
+    }
+
+    .input-field input {
+        padding: 15px 40px 15px 15px;
+        font-size: 14px;
+    }
+
+    .btn {
+        height: 40px;
+        font-size: 14px;
+    }
+}
