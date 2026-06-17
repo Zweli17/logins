@@ -12,7 +12,18 @@ import { signInWithEmailAndPassword }
 const form          = document.getElementById("loginForm");
 const emailInput    = document.getElementById("email");
 const passwordInput = document.getElementById("password");
-const submitBtn     = form.querySelector(".btn.solid");
+
+if (!form || !emailInput || !passwordInput) {
+  throw new Error(
+    "Login form elements not found. Ensure the page contains #loginForm, #email, and #password."
+  );
+}
+
+const submitBtn = form.querySelector(".btn.solid");
+
+if (!submitBtn) {
+  throw new Error("Submit button (.btn.solid) not found inside the login form.");
+}
 
 // ── Rate limiting ────────────────────────────────────────────────────────────
 const MAX_ATTEMPTS = 5;
@@ -51,7 +62,7 @@ form.addEventListener("submit", async (e) => {
     attemptCount = 0;
     window.location.href = "dashboard.html";
   } catch (err) {
-    setLoading(submitBtn, false, "Login");
+    console.error("Login failed:", err);
     attemptCount++;
 
     if (attemptCount >= MAX_ATTEMPTS) {
@@ -62,5 +73,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     showError(submitBtn, friendlyAuthError(err), "loginError");
+  } finally {
+    setLoading(submitBtn, false, "Login");
   }
 });
