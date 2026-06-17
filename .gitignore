@@ -1,2 +1,21 @@
+# Environment and config files
+.env
+.env.local
+.env.production
+firebase-config.js
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
 node_modules/
+
+# Test coverage
 coverage/

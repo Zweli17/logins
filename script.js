@@ -2,7 +2,7 @@
 import { auth } from "./shared/firebase-config.js";
 
 // Import shared form utilities
-import { showError, clearError, setLoading, friendlyAuthError }
+import { showError, clearError, setLoading, friendlyAuthError, sanitizeInput }
   from "./shared/form-utils.js";
 
 import { signInWithEmailAndPassword }
@@ -14,12 +14,24 @@ const emailInput    = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const submitBtn     = form.querySelector(".btn.solid");
 
+// ── Rate limiting ────────────────────────────────────────────────────────────
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_MS   = 60_000;
+let attemptCount   = 0;
+let lockoutUntil   = 0;
+
 // ── Form submit ──────────────────────────────────────────────────────────────
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearError("loginError");
 
-  const email    = emailInput.value.trim();
+  if (Date.now() < lockoutUntil) {
+    const seconds = Math.ceil((lockoutUntil - Date.now()) / 1000);
+    showError(submitBtn, `Too many attempts. Please wait ${seconds}s.`, "loginError");
+    return;
+  }
+
+  const email    = sanitizeInput(emailInput.value.trim());
   const password = passwordInput.value;
 
   if (!email) {
@@ -36,9 +48,19 @@ form.addEventListener("submit", async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    attemptCount = 0;
     window.location.href = "dashboard.html";
   } catch (err) {
     setLoading(submitBtn, false, "Login");
+    attemptCount++;
+
+    if (attemptCount >= MAX_ATTEMPTS) {
+      lockoutUntil = Date.now() + LOCKOUT_MS;
+      attemptCount = 0;
+      showError(submitBtn, "Too many failed attempts. Please wait 60 seconds.", "loginError");
+      return;
+    }
+
     showError(submitBtn, friendlyAuthError(err), "loginError");
   }
 });

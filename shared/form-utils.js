@@ -1,15 +1,24 @@
 // Shared form utility functions
 
 /**
+ * Generic error message for credential-related failures.
+ * Prevents user enumeration by not distinguishing between
+ * "user not found" and "wrong password".
+ */
+const GENERIC_CREDENTIAL_ERROR = "Invalid email or password.";
+
+/**
  * Map of Firebase auth error codes to user-friendly messages.
+ * Credential-related codes intentionally share a generic message
+ * to prevent account enumeration attacks.
  */
 export const AUTH_ERROR_MESSAGES = {
-  "auth/user-not-found":          "No account found with this email.",
-  "auth/wrong-password":          "Incorrect password. Please try again.",
+  "auth/user-not-found":          GENERIC_CREDENTIAL_ERROR,
+  "auth/wrong-password":          GENERIC_CREDENTIAL_ERROR,
   "auth/invalid-email":           "Please enter a valid email address.",
   "auth/too-many-requests":       "Too many attempts. Please try again later.",
   "auth/network-request-failed":  "Network error. Check your connection.",
-  "auth/invalid-credential":      "Invalid email or password.",
+  "auth/invalid-credential":      GENERIC_CREDENTIAL_ERROR,
   "auth/email-already-in-use":    "This email is already registered.",
   "auth/weak-password":           "Password should be at least 6 characters.",
 };
@@ -50,9 +59,17 @@ export function setLoading(btn, loading, idleLabel = "Submit") {
 }
 
 /**
- * Return a friendly message for a Firebase auth error code,
- * falling back to the raw error message.
+ * Return a friendly message for a Firebase auth error code.
+ * Falls back to a generic credential error to avoid leaking
+ * information about account existence.
  */
 export function friendlyAuthError(err) {
-  return AUTH_ERROR_MESSAGES[err.code] || err.message;
+  return AUTH_ERROR_MESSAGES[err.code] || GENERIC_CREDENTIAL_ERROR;
+}
+
+/**
+ * Strip characters commonly used in XSS payloads from user input.
+ */
+export function sanitizeInput(str) {
+  return str.replace(/[<>"'&]/g, "");
 }
