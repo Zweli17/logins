@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' https://www.gstatic.com/firebasejs/;
+                   style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com;
+                   font-src https://unpkg.com https://fonts.gstatic.com;
+                   connect-src https://*.firebaseio.com https://*.googleapis.com https://identitytoolkit.googleapis.com;
+                   img-src 'self' data:;">
     <link rel="stylesheet" href="shared/shared.css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          integrity="sha384-42kyIPf7HDYLkGffmxDhSx/3Z/53wGBs3nD6wEFxsbeDc7rMO6mkYbkAcpRsnMU2"
+          crossorigin="anonymous" />
     <title>Sign Up</title>
 </head>
 
@@ -14,22 +24,25 @@
         <div class="signin-signup">
 
             <!--  SIGNUP FORM -->
-            <form class="auth-form" id="signupForm">
+            <form class="auth-form" id="signupForm" autocomplete="off">
                 <h2 class="title">Sign up</h2>
 
                 <div class="input-field">
                     <i class='bx bxs-user'></i>
-                    <input type="email" id="email" placeholder="Email" required />
+                    <input type="email" id="email" placeholder="Email"
+                           required maxlength="254" autocomplete="email" />
                 </div>
 
                 <div class="input-field">
                     <i class='bx bxs-lock-alt'></i>
-                    <input type="password" id="password" placeholder="Password" required />
+                    <input type="password" id="password" placeholder="Password"
+                           required maxlength="128" autocomplete="new-password" />
                 </div>
 
                 <div class="input-field">
                     <i class='bx bxs-lock'></i>
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password"
+                           required maxlength="128" autocomplete="new-password" />
                 </div>
 
                 <input type="submit" value="Sign up" class="btn solid" />

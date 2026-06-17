@@ -2,7 +2,7 @@
 import { auth } from "./shared/firebase-config.js";
 
 // Import shared form utilities
-import { showError, clearError, setLoading, friendlyAuthError }
+import { showError, clearError, setLoading, friendlyAuthError, sanitizeInput }
   from "./shared/form-utils.js";
 
 import { createUserWithEmailAndPassword }
@@ -20,7 +20,7 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearError("signupError");
 
-  const email       = emailInput.value.trim();
+  const email       = sanitizeInput(emailInput.value.trim());
   const password    = passwordInput.value;
   const confirmPwd  = confirmPwdInput.value;
 
