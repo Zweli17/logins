@@ -1,0 +1,30 @@
+{
+  "name": "logins",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "roots": [
+      "<rootDir>/__tests__"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "validation.js",
+      "dom-helpers.js",
+      "error-messages.js"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@jest/globals": "^30.4.1",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1"
+  }
+}
