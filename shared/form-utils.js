@@ -21,6 +21,7 @@ export const AUTH_ERROR_MESSAGES = {
   "auth/invalid-credential":      GENERIC_CREDENTIAL_ERROR,
   "auth/email-already-in-use":    "This email is already registered.",
   "auth/weak-password":           "Password should be at least 6 characters.",
+  "auth/user-disabled":           "This account has been disabled. Contact support.",
 };
 
 /**
@@ -64,7 +65,10 @@ export function setLoading(btn, loading, idleLabel = "Submit") {
  * information about account existence.
  */
 export function friendlyAuthError(err) {
-  return AUTH_ERROR_MESSAGES[err.code] || GENERIC_CREDENTIAL_ERROR;
+  if (err && err.code && AUTH_ERROR_MESSAGES[err.code]) {
+    return AUTH_ERROR_MESSAGES[err.code];
+  }
+  return GENERIC_CREDENTIAL_ERROR;
 }
 
 /**

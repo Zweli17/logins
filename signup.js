@@ -13,7 +13,18 @@ const form             = document.getElementById("signupForm");
 const emailInput       = document.getElementById("email");
 const passwordInput    = document.getElementById("password");
 const confirmPwdInput  = document.getElementById("confirmPassword");
-const submitBtn        = form.querySelector(".btn.solid");
+
+if (!form || !emailInput || !passwordInput || !confirmPwdInput) {
+  throw new Error(
+    "Signup form elements not found. Ensure the page contains #signupForm, #email, #password, and #confirmPassword."
+  );
+}
+
+const submitBtn = form.querySelector(".btn.solid");
+
+if (!submitBtn) {
+  throw new Error("Submit button (.btn.solid) not found inside the signup form.");
+}
 
 // ── Form submit ──────────────────────────────────────────────────────────────
 form.addEventListener("submit", async (e) => {
@@ -45,7 +56,9 @@ form.addEventListener("submit", async (e) => {
     await createUserWithEmailAndPassword(auth, email, password);
     window.location.href = "logins.html";
   } catch (err) {
-    setLoading(submitBtn, false, "Sign up");
+    console.error("Signup failed:", err);
     showError(submitBtn, friendlyAuthError(err), "signupError");
+  } finally {
+    setLoading(submitBtn, false, "Sign up");
   }
 });
