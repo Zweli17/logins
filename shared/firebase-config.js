@@ -14,7 +14,20 @@ const firebaseConfig = {
   measurementId:     ""
 };
 
-const app  = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+let app;
+let auth;
+
+try {
+  app  = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+} catch (initError) {
+  console.error("Firebase initialization failed:", initError);
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.innerHTML =
+      '<p style="color:#f87171;text-align:center;margin-top:40vh;">' +
+      "Unable to connect to the authentication service. Please try again later.</p>";
+  });
+  throw initError;
+}
 
 export { app, auth };
